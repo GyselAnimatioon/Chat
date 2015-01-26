@@ -14,37 +14,23 @@ import java.util.logging.Logger;
 public class Server {
 
     public static void main(String[] args) {
+        while (true) {
+            try {
+                System.out.println("Server wird gestartet...");
+                ServerSocket server = new ServerSocket(5678);
+                System.out.println("Server wurde gestartet!");
 
-        try {
-            System.out.println("Server wird gestartet...");
-            ServerSocket server = new ServerSocket(5678);
-            System.out.println("Server wurde gestartet!");
+                System.out.println("Warte auf Client...");
+                Socket client = server.accept();
+                System.out.println("Client verbunden!");
 
-            System.out.println("Warte auf Client...");
-            Socket client = server.accept();
-            System.out.println("Client verbunden!");
-            
-            // Streams
-            OutputStream out = client.getOutputStream();
-            PrintWriter writer = new PrintWriter(out);
-            InputStream in = client.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-
-            String s = null;
-
-            while ((s = reader.readLine()) != null) {
-                writer.write(s + "\n");
-                writer.flush();
-                System.out.println("Empfangen vom Client: " + s);
+                Thread t1 = new Thread(new Handler(client));
+                t1.start();
+                
+            } catch (IOException ex) {
+                Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            writer.close();
-            reader.close();
-
-        } catch (IOException ex) {
-            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
-
 }
