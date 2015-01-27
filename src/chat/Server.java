@@ -1,6 +1,8 @@
 // Package muss natürlich angepasst werden
 package chat;
 
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.time;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -16,6 +18,7 @@ public class Server {
     ArrayList<PrintWriter> list_clientWriter;
     final int LEVEL_ERROR = 1;
     final int LEVEL_NORMAL = 0;
+    final int LEVEL_OK = 2;
 
     public static void main(String[] args) {
         Server s = new Server();
@@ -45,10 +48,11 @@ public class Server {
             String nachricht;
             try {
                 while ((nachricht = reader.readLine()) != null) {
-                    appendTextToConsole("Vom Client: \n" + nachricht, LEVEL_NORMAL);
+                    appendTextToConsole("[" + date().substring(0, 10) + " " + time().substring(0, 8) + "]: " + nachricht, LEVEL_NORMAL);
                     sendToAllClients(nachricht);
                 }
             } catch (IOException e) {
+                System.out.println(e.getMessage());
                 System.err.println("User geleftet");
             }
         }
@@ -62,7 +66,7 @@ public class Server {
                 list_clientWriter.add(writer);
                 Thread clientThread = new Thread(new ClientHandler(client));
                 clientThread.start();
-                System.out.println(clientThread.getName() + " gejoint.");
+                appendTextToConsole(clientThread.getName() + " gestartet!", LEVEL_ERROR);
             } catch (IOException e) {
                 e.printStackTrace();
             }

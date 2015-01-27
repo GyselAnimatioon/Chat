@@ -123,7 +123,10 @@ public class Client {
             writer.flush();
             return true;
         } catch (Exception e) {
-            appendTextMessages("Netzwerkverbindung konnte nicht hergestellt werden");
+            //appendTextMessages("Netzwerkverbindung konnte nicht hergestellt werden");
+            appendTextMessages("Der Server konnte nicht gefunden werden.\n"
+                    + "Dies kann an einem Netzwerkfehler liegen.\n"
+                    + "Es kann sein das der Server offline ist.");
             return false;
         }
     }
@@ -159,6 +162,8 @@ public class Client {
                 } else {
                     sendMessageToServer();
                 }
+            } else if (arg0.getKeyCode() == KeyEvent.VK_ALT) {
+                //later
             }
         }
 
