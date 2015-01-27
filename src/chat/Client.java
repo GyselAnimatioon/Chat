@@ -70,7 +70,7 @@ public class Client {
 
     public boolean connectToServer() {
         try {
-            client = new Socket("127.0.0.1", 5555);
+            client = new Socket("192.168.43.142", 5555);
             reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
             writer = new PrintWriter(client.getOutputStream());
             appendTextMessages("Netzwerkverbindung hergestellt");
