@@ -9,7 +9,7 @@ import java.net.Socket;
 
 public class Handler implements Runnable {
 
-    private Socket client;
+    private final Socket client;
 
     public Handler(Socket client) {
         this.client = client;
@@ -24,7 +24,7 @@ public class Handler implements Runnable {
             InputStream in = client.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
-            String s = null;
+            String s;
 
             while ((s = reader.readLine()) != null) {
                 writer.write(s + "\n");
@@ -37,7 +37,7 @@ public class Handler implements Runnable {
             
             client.close();
         } catch (Exception e) {
-
+            //RORR
         }
     }
 

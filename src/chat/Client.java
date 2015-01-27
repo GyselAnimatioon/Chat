@@ -39,14 +39,14 @@ public class Client {
     }
 
     public void createGUI() {
-        clientFrame = new JFrame("Chat");
+        clientFrame = new JFrame("Mein Chat");
         clientFrame.setSize(800, 600);
         clientPanel = new JPanel();
         textArea_Messages = new JTextArea();
         textArea_Messages.setEditable(false);
         textField_ClientMessage = new JTextField(38);
         textField_ClientMessage.addKeyListener(new SendPressEnterListener());
-        button_SendMessage = new JButton("Senden");
+        button_SendMessage = new JButton("Send");
         button_SendMessage.addActionListener(new SendButtonListener());
         textField_Username = new JTextField(10);
         scrollPane_Messages = new JScrollPane(textArea_Messages);
@@ -77,7 +77,6 @@ public class Client {
             return true;
         } catch (Exception e) {
             appendTextMessages("Netzwerkverbindung konnte nicht hergestellt werden");
-            e.printStackTrace();
             return false;
         }
     }

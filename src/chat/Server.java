@@ -49,7 +49,7 @@ public class Server {
                     sendToAllClients(nachricht);
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                System.err.println("User geleftet");
             }
         }
     }
@@ -62,6 +62,7 @@ public class Server {
                 list_clientWriter.add(writer);
                 Thread clientThread = new Thread(new ClientHandler(client));
                 clientThread.start();
+                System.out.println(clientThread.getName() + " gejoint.");
             } catch (IOException e) {
                 e.printStackTrace();
             }
