@@ -70,10 +70,12 @@ public class Client {
 
     public boolean connectToServer() {
         try {
-            client = new Socket("192.168.43.142", 5555);
+            client = new Socket("178.197.229.62", 5555);
             reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
             writer = new PrintWriter(client.getOutputStream());
             appendTextMessages("Netzwerkverbindung hergestellt");
+            writer.println("Neuer User gejoint");
+            writer.flush();
             return true;
         } catch (Exception e) {
             appendTextMessages("Netzwerkverbindung konnte nicht hergestellt werden");
