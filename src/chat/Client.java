@@ -70,7 +70,7 @@ public class Client {
 
     public boolean connectToServer() {
         try {
-            client = new Socket("178.197.229.62", 5555);
+            client = new Socket("192.168.43.142", 5555);
             reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
             writer = new PrintWriter(client.getOutputStream());
             appendTextMessages("Netzwerkverbindung hergestellt");
@@ -129,6 +129,7 @@ public class Client {
                 while ((message = reader.readLine()) != null) {
                     appendTextMessages(message);
                     textArea_Messages.setCaretPosition(textArea_Messages.getText().length());
+                    clientFrame.toFront();
                 }
             } catch (IOException e) {
                 appendTextMessages("Nachricht konnte nicht empfangen werden!");
